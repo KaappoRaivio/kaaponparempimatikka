@@ -5,12 +5,13 @@ from _operatorD.__operator import BinaryOperator, UnaryOperator
 from monomial import Monomial
 
 
-class Unsolvable:
+class Solvable:
     def __init__(self, expr: List[BinaryOperator or UnaryOperator or Monomial]):
         self.expr = expr
 
     def solve(self):
-        raise Exception("Cannot solve Unsolvable!")
+        ...
+
 
     def __str__(self):
         mastertemp = ""
@@ -24,3 +25,4 @@ class Unsolvable:
                 mastertemp += f" {str(self.expr[i])}"
 
         return mastertemp.lstrip()
+
