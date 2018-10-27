@@ -1,0 +1,3 @@
+class Unsolvable:
+    def __init__(self):
+        ...
