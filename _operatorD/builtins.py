@@ -1,7 +1,7 @@
 import operator
 import math
 
-from _operator._operator import BinaryOperator, UnaryOperator
+from _operatorD.__operator import BinaryOperator, UnaryOperator
 
 OPERATOR_BINARY_ADD         = BinaryOperator("+", operator.add)
 OPERATOR_BINARY_SUBTRACT    = BinaryOperator("-", operator.sub)

@@ -1,6 +1,6 @@
 from typing import Callable
 
-from operator.infix import UnaryInfix, BinaryInfix
+from _operatorD.infix import UnaryInfix, BinaryInfix
 
 
 class UnaryOperator(UnaryInfix):
