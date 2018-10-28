@@ -3,6 +3,15 @@ from typing import Union, List
 
 from collections import Counter
 
+def first(_list):
+    return next(iter(_list), None)
+
+
+def last(_list):
+    try:
+        return _list[-1]
+    except IndexError:
+        return None
 
 class Monomial:
     superscript = {
@@ -54,15 +63,15 @@ class Monomial:
 
     def correctExponents(self):
 
-        if self.exponents[0] is ... and self.exponents[-1] is ...:
+        if first(self.exponents) is ... and last(self.exponents) is ...:
             raise Exception("Cannot have an Ellipsis on both ends!")
 
-        if self.exponents[0] is ...:
+        if first(self.exponents) is ...:
             unique = len(self.exponents[1:])
 
             for i in range(len(self.vars) - unique):
                 self.exponents.insert(0, 1)
-        elif self.exponents[-1] is ...:
+        elif last(self.exponents) is ...:
             unique = len(self.exponents[:-1])
 
             for i in range(len(self.vars) - unique):
@@ -71,9 +80,12 @@ class Monomial:
             for i in range(len(self.vars) - len(self.exponents)):
                 self.exponents.append(1)
 
-        self.exponents.remove(...)
+        try:
+            self.exponents.remove(...)
+        except ValueError:
+            pass
 
-    def __init__(self, coeff: int or float, vars: str, *exponents):
+    def __init__(self, coeff: int or float, vars: str="", *exponents):
 
         if len(vars) != len(exponents) and not all(map(lambda x: True if x == 1 else False, exponents)) and exponents[0] is not Ellipsis and exponents[-1] is not Ellipsis:
             raise Exception("Not all exponents provided!")
@@ -103,5 +115,13 @@ class Monomial:
 
 
 
-a = Monomial(3, "abccc", 1, 2, 3, ...)
-print(a)
+a = Monomial(2, "x", 2)
+b = Monomial(2)
+c = Monomial(3, "ab")
+d = Monomial(4, "abc", ..., 3)
+e = Monomial(-3.0, "xyzabc", 1, 2, 3, ...)
+
+
+
+
+print(a, b, c, d, e)
