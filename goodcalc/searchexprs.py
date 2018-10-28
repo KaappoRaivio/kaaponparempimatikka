@@ -4,7 +4,7 @@ import re
 ExprSlice = namedtuple("ExprSlice", ["content", "start_pos", "end_pos"])
 Calculation = namedtuple("Calculation", ["left_operand", "operation", "right_operand", "left_boundary", "right_boundary"])
 
-PATTERN = re.compile(r"[\$0-9.]")
+PATTERN = re.compile(r"[$0-9.]")
 
 def getContentInsideBraces(expression):
     if not expression:

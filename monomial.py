@@ -1,7 +1,87 @@
+import collections
+from typing import Union, List
+
+from collections import Counter
+
+
 class Monomial:
-    def __init__(self, coeff: int or float, var: chr):
+    superscript = {
+        "0": "⁰",
+        "1": "¹",
+        "2": "²",
+        "3": "³",
+        "4": "⁴",
+        "5": "⁵",
+        "6": "⁶",
+        "7": "⁷",
+        "8": "⁸",
+        "9": "⁹"
+    }
+
+    @staticmethod
+    def getSuperscript(string):
+        asd = []
+
+        for i in string:
+            asd.append(Monomial.superscript[i])
+
+        return "".join(asd)
+
+    def combineSameVars(self):
+        for i in range(len(self.vars) - len(self.exponents)):
+            self.exponents.append(1)
+
+        combinedexponents = collections.Counter()
+
+        for var, exponent in zip(self.vars, self.exponents):
+            combinedexponents[var] += exponent
+
+        temp_vars = []
+        temp_exponents = []
+        for key, value in combinedexponents.items():
+            temp_vars.append(key)
+            temp_exponents.append(value)
+
+        self.vars = temp_vars
+        self.exponents = temp_exponents
+
+    def removeZeroExponents(self):
+        index = 0
+        while index < len(self.vars):
+            if self.exponents[index] == 0:
+                del self.vars[index]
+                del self.exponents[index]
+
+            index += 1
+
+    def __init__(self, coeff: int or float, vars: str, *exponents):
+
+        if len(vars) != len(exponents) and not all(map(lambda x: True if x == 1 else False, exponents)):
+            raise Exception("Not all exponents provided!")
+
+
         self.coeff = coeff
-        self.chr = var
+        self.vars = list(vars)
+        self.exponents = list(exponents)
+
+        self.combineSameVars()
+        self.removeZeroExponents()
+
+
+        self.solvable = True
 
     def __str__(self):
-        return f"{self.coeff}{self.chr}"
+        temp = []
+        temp.append(str(self.coeff))
+        for letter, exponent in zip(self.vars, self.exponents):
+            temp.append(letter)
+            if exponent != 1:
+                temp.append(self.getSuperscript(str(exponent)))
+
+        return "".join(temp)
+
+
+
+
+a = Monomial(3, "aaabc", 1, 1, 1, 3, 3)
+print(a)

@@ -67,7 +67,9 @@ def recursiveCalculating(expression):
                                                               makeOneOperation(
                                                                   calculatable.left_operand,
                                                                   calculatable.operation,
-                                                                  calculatable.right_operand)))
+                                                                  calculatable.right_operand)
+                                                              )
+                   )
 
     # 4.
     else:
