@@ -28,8 +28,6 @@ class Monomial:
         return "".join(asd)
 
     def combineSameVars(self):
-        for i in range(len(self.vars) - len(self.exponents)):
-            self.exponents.append(1)
 
         combinedexponents = collections.Counter()
 
@@ -54,9 +52,30 @@ class Monomial:
 
             index += 1
 
+    def correctExponents(self):
+
+        if self.exponents[0] is ... and self.exponents[-1] is ...:
+            raise Exception("Cannot have an Ellipsis on both ends!")
+
+        if self.exponents[0] is ...:
+            unique = len(self.exponents[1:])
+
+            for i in range(len(self.vars) - unique):
+                self.exponents.insert(0, 1)
+        elif self.exponents[-1] is ...:
+            unique = len(self.exponents[:-1])
+
+            for i in range(len(self.vars) - unique):
+                self.exponents.append(1)
+        else:
+            for i in range(len(self.vars) - len(self.exponents)):
+                self.exponents.append(1)
+
+        self.exponents.remove(...)
+
     def __init__(self, coeff: int or float, vars: str, *exponents):
 
-        if len(vars) != len(exponents) and not all(map(lambda x: True if x == 1 else False, exponents)):
+        if len(vars) != len(exponents) and not all(map(lambda x: True if x == 1 else False, exponents)) and exponents[0] is not Ellipsis and exponents[-1] is not Ellipsis:
             raise Exception("Not all exponents provided!")
 
 
@@ -64,6 +83,7 @@ class Monomial:
         self.vars = list(vars)
         self.exponents = list(exponents)
 
+        self.correctExponents()
         self.combineSameVars()
         self.removeZeroExponents()
 
@@ -83,5 +103,5 @@ class Monomial:
 
 
 
-a = Monomial(3, "aaabc", 1, 1, 1, 3, 3)
+a = Monomial(3, "abccc", 1, 2, 3, ...)
 print(a)
