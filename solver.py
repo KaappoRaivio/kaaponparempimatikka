@@ -91,5 +91,5 @@ class Solver:
 
 a = Solver([[builtins.OPERATOR_BINARY_MULTIPLY, builtins.OPERATOR_BINARY_DIVIDE], [builtins.OPERATOR_BINARY_ADD, builtins.OPERATOR_BINARY_SUBTRACT]], list())
 # print(a.getAllOperatorRegexes())
-a.expressionFromString("12345.0xs +2")
+a.expressionFromString("12345.0xs+2")
 # print(Solver.MONOMIAL_REGEX.match("-3.0 x"))

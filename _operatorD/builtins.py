@@ -11,3 +11,5 @@ OPERATOR_BINARY_POWER       = BinaryOperator("^", operator.pow)
 
 OPERATOR_UNARY_MINUS        = UnaryOperator ("-", operator.neg)
 OPERATOR_UNARY_SQUARE_ROOT  = UnaryOperator ("√", math.sqrt)
+
+

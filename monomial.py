@@ -85,6 +85,11 @@ class Monomial:
         except ValueError:
             pass
 
+
+    @classmethod
+    def fromString(cls, string:str):
+    
+
     def __init__(self, coeff: int or float, vars: str="", *exponents):
 
         if len(vars) != len(exponents) and not all(map(lambda x: True if x == 1 else False, exponents)) and exponents[0] is not Ellipsis and exponents[-1] is not Ellipsis:
