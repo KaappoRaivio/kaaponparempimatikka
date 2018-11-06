@@ -31,39 +31,53 @@ class Tokenizer:
                 continue
 
     def tokenize(self, expr: str):
-        a = 0
-        while a < len(expr):
+        mastertemp = []
+        index = 0
+        while index < len(expr):
             for regex, token in self.regexIter(sorted(TOKENS, key=len, reverse=True)):
                 # print(f"DEBUG: regex: {regex}")
                 length = 1
-                slice = expr[a:a + length]
+                slice = expr[index:index + length]
 
-                while True:
-                    slice = expr[a:a + length]
-                    length += 1
+                result = True
+                while index + len(slice) < len(expr):
+
                     if regex.match(slice):
-                        print(slice, self.tokens[slice])
-                        a += len(slice)
-                        break
-                    if a + len(slice) >= len(expr):
+                        # print(slice, regex.pattern)
                         break
 
 
+                    length += 1
+                    slice = expr[index:index + length]
+                else:
+                    result = False
 
-            a += 1
+                if result:
+                    # import pdb; pdb.set_trace()
+                    print(slice, regex.pattern)
+                    index += len(slice) - 1
+                    break
+                # print("-------------")
+                # index += len(slice) - 1
+                # quit()
+            index += 1
+        print(index, len(expr))
+        return mastertemp
+
+
         # already_itered = ()
         #
         # for regex, token in self.regexIter(sorted(TOKENS, key=len, reverse=True)): #searching for the longest tokens first
         #
         #     slice_len = len(token)
         #
-        #     for a in self.smartIter(len(expr) - slice_len, already_itered):
-        #         slice = expr[a:a + slice_len]
+        #     for index in self.smartIter(len(expr) - slice_len, already_itered):
+        #         slice = expr[index:index + slice_len]
         #         try:
         #             value = self.tokens[slice]
         #             if value == self.tokens[token]:
-        #                 print(f"Found: value: {value}, token: {token}, from {slice}, index: {a}")
-        #                 already_itered += tuple(range(a, a + slice_len))
+        #                 print(f"Found: value: {value}, token: {token}, from {slice}, index: {index}")
+        #                 already_itered += tuple(range(index, index + slice_len))
         #         except KeyError:
         #             continue
 
@@ -83,6 +97,6 @@ TOKENS = RegexDict({
 #     token.Token(re.escape("+"), )
 # )
 
-TESTEXPR = "(3 + 2) ** 3"
+TESTEXPR = "(3 + 2) ** 3 * 2"
 
-Tokenizer(TOKENS).tokenize(TESTEXPR)
+print(list(map(str, Tokenizer(TOKENS).tokenize(TESTEXPR))))

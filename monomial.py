@@ -1,7 +1,5 @@
 import collections
-from typing import Union, List
 
-from collections import Counter
 
 def first(_list):
     return next(iter(_list), None)
@@ -12,6 +10,7 @@ def last(_list):
         return _list[-1]
     except IndexError:
         return None
+
 
 class Monomial:
     superscript = {
@@ -88,7 +87,7 @@ class Monomial:
 
     @classmethod
     def fromString(cls, string:str):
-    
+        pass
 
     def __init__(self, coeff: int or float, vars: str="", *exponents):
 
@@ -123,7 +122,7 @@ class Monomial:
 a = Monomial(2, "x", 2)
 b = Monomial(2)
 c = Monomial(3, "ab")
-d = Monomial(4, "abc", ..., 3)
+d = Monomial(4, "abac", ..., 3)
 e = Monomial(-3.0, "xyzabc", 1, 2, 3, ...)
 
 
