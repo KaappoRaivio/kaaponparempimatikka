@@ -18,7 +18,7 @@ class Tokenizer:
 
 
     @staticmethod
-    def regexIter(iterable: List[str]):
+    def regexIter(iterable: List[Sized]):
         for i in iterable:
             yield re.compile(i), i
 
@@ -33,17 +33,15 @@ class Tokenizer:
     def tokenize(self, expr: str):
         mastertemp = []
         index = 0
-        expr = expr.replace(" ", "")
         while index < len(expr):
-            # print(f"asd {index, expr[index]}")
             for regex, token in self.regexIter(sorted(TOKENS, key=len, reverse=True)):
                 # print(f"DEBUG: regex: {regex}")
                 length = 1
                 slice = expr[index:index + length]
 
                 result = True
-                while index + length <= len(expr):
-                    # print(f"sdf {length}")
+                while index + len(slice) < len(expr):
+
                     if regex.match(slice):
                         # print(slice, regex.pattern)
                         break
@@ -63,6 +61,7 @@ class Tokenizer:
                 # index += len(slice) - 1
                 # quit()
             index += 1
+        print(index, len(expr))
         return mastertemp
 
 
