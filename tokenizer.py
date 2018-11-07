@@ -40,7 +40,7 @@ class Tokenizer:
                 slice = expr[index:index + length]
 
                 result = True
-                while index + len(slice) < len(expr):
+                while index + length <= len(expr):
 
                     if regex.match(slice):
                         # print(slice, regex.pattern)
